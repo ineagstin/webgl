@@ -1,7 +1,11 @@
-# netlify.toml
 [build]
-  publish = "Build" # Sesuaikan dengan nama folder build WebGL Anda
-  command = "#" # Tidak perlu command build karena kita sudah punya file build
+  publish = "Build"    # Harus sama dengan nama folder yang berisi index.html
+  command = "#"        # Tidak perlu command build
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
 
 [build.environment]
-  NODE_VERSION = "18.17.0" # Gunakan versi Node.js yang stabil dan tersedia
+  NODE_VERSION = "18.17.0"
