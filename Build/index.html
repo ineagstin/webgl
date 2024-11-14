@@ -15,32 +15,6 @@
     <link rel="manifest" href="TemplateData/site.webmanifest">
     <meta name="theme-color" content="#000000">
     
-    <!-- PWA -->
-    
-{
-    "name": "CatXTon",
-    "short_name": "CatXTon",
-    "icons": [
-        {
-            "src": "TemplateData/favicon-16x16.png",
-            "sizes": "16x16",
-            "type": "image/png"
-        },
-        {
-            "src": "TemplateData/favicon-32x32.png",
-            "sizes": "32x32",
-            "type": "image/png"
-        },
-        {
-            "src": "TemplateData/apple-touch-icon.png",
-            "sizes": "180x180",
-            "type": "image/png"
-        }
-    ],
-    "theme_color": "#000000",
-    "background_color": "#000000",
-    "display": "standalone"
-}
     <style>
       html, body {
         margin: 0;
@@ -127,11 +101,11 @@
 
     <script>
       const buildUrl = "Build";
-      const loaderUrl = buildUrl + "/WEBGL.loader.js";
+      const loaderUrl = buildUrl + "/updategame.loader.js";
       const config = {
-        dataUrl: buildUrl + "/WEBGL.data.br",
-        frameworkUrl: buildUrl + "/WEBGL.framework.js.br",
-        codeUrl: buildUrl + "/WEBGL.wasm.br",
+        dataUrl: buildUrl + "/updategame.data.br",
+        frameworkUrl: buildUrl + "/updategame.framework.js.br",
+        codeUrl: buildUrl + "/updategame.wasm.br",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "Demo",
         productName: "CatXTon",
