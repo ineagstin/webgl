@@ -3,6 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- Meta viewport dan screen orientation -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="ScreenOrientation" content="autoRotate:disabled">
     <title>CatXTon</title>
     
     <!-- Favicon -->
@@ -83,9 +86,59 @@
         font-size: 16px;
         color: #fff;
       }
+
+      /* css rotation warning */
+      #rotation-warning {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        color: white;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        z-index: 9999;
+        flex-direction: column;
+      }
+
+      #rotation-icon {
+        width: 64px;
+        height: 64px;
+        margin-bottom: 20px;
+        animation: rotate 1.5s ease-in-out infinite;
+      }
+
+      @keyframes rotate {
+        0% { transform: rotate(0deg); }
+        25% { transform: rotate(-90deg); }
+        100% { transform: rotate(-90deg); }
+      }
+
+      /* Media query mode portrait */
+      @media screen and (orientation: portrait) {
+        #unity-container { display: none; }
+        #rotation-warning { display: flex; }
+      }
+
+      /* Media query mode landscape */
+      @media screen and (orientation: landscape) {
+        #unity-container { display: block; }
+        #rotation-warning { display: none; }
+      }
     </style>
   </head>
   <body>
+    <!-- rotation warning -->
+    <div id="rotation-warning">
+      <svg id="rotation-icon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+        <path d="M21 12a9 9 0 11-9-9c2.52 0 4.93 1 6.74 2.74L21 8V3M21 8h-5"/>
+      </svg>
+      <div>Please rotate your device to landscape mode</div>
+    </div>
+
     <div id="unity-container">
       <canvas id="unity-canvas"></canvas>
       
@@ -101,16 +154,23 @@
 
     <script>
       const buildUrl = "Build";
-      const loaderUrl = buildUrl + "/updategame.loader.js";
+      const loaderUrl = buildUrl + "/Build.loader.js";
       const config = {
-        dataUrl: buildUrl + "/updategame.data.br",
-        frameworkUrl: buildUrl + "/updategame.framework.js.br",
-        codeUrl: buildUrl + "/updategame.wasm.br",
+        dataUrl: buildUrl + "/Build.data.br",
+        frameworkUrl: buildUrl + "/Build.framework.js.br",
+        codeUrl: buildUrl + "/Build.wasm.br",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "Demo",
         productName: "CatXTon",
         productVersion: "0.1.0",
       };
+
+      // Lock screen orientation ke landscape
+      if (screen.orientation && screen.orientation.lock) {
+        screen.orientation.lock('landscape').catch(function(error) {
+          console.log("Orientation lock failed:", error);
+        });
+      }
 
       const loadingScreen = document.querySelector("#loading-screen");
       const progressBar = document.querySelector("#progress-bar");
